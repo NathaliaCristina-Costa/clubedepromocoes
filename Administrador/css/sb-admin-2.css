@@ -2344,6 +2344,12 @@ fieldset:disabled a.btn {
   pointer-events: none;
 }
 
+.btn-login{
+  color: #fff;
+  background-color: #efb906;
+  border-color: #efb906;
+}
+
 .btn-primary {
   color: #fff;
   background-color: #e85a59;
