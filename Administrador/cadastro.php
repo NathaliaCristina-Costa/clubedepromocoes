@@ -91,7 +91,7 @@
                                     
                                 }
                             ?>
-                            <form class="user" method="POST">
+                            <form class="user" method="POST" enctype="multipart/form-data">
                             <div class="form-group row">
                                     <div class="col-sm-10 mb-3 mb-sm-0">
                                     <label><b>Imagens Produto</b></label>

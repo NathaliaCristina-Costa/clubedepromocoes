@@ -98,9 +98,10 @@
                                                 }
                                         ?>
                                         <td>
-                                            <a href="galeria.php?id=" class="btn btn-circle btn-sm btn-info"><i class="fas fa-flag"></i></a>
+                                            <a href="galeria.php?id=<?php echo $dados[$i]['id'];?>" class="btn btn-circle btn-sm btn-info"><i class="fas fa-flag"></i></a>
+                                            <a href="adicionar.php?id=<?php echo $dados[$i]['id'];?>" class="btn btn-circle btn-sm btn-secondary"><i class="fas fa-plus"></i></a>
                                             <a href="editar.php?id=<?php echo $dados[$i]['id']; ?>" class="btn btn-circle btn-sm btn-warning"><i class="fas fa-pencil-alt"></i></a>
-                                            <a href="excluir.php?id=<?php echo $dados[$i]['id'];?>" class="btn btn-circle btn-sm btn-danger"><i class="fas fa-trash" onclick="return confirm('Deseja Excluir?')"></i></a>
+                                            <a href="excluir.php?id=<?php echo $dados[$i]['id'];?>" class="btn btn-circle btn-sm btn-danger" onclick="return confirm('Deseja Excluir?')"><i class="fas fa-trash" ></i></a>
                                         </td>
                                         <?php
                                                 echo'</tr>';

@@ -6,6 +6,7 @@
     if (isset($_GET['id']) && !empty($_GET['id']) ) {
         $id = addslashes($_GET['id']);
         $produto = $p->buscarProdutoPorId($id);
+        $img     = $p->galeria($id);
     }
 
 ?>
@@ -61,64 +62,29 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="./index.php">Home</a></li>
                             <li class="breadcrumb-item"><a href="./produtos.php">Produtos</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Cadastro</li>
+                            <li class="breadcrumb-item active" aria-current="page">Galeria</li>
                         </ol>
                     </nav>
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800 mt-2">Editar Produto</h1>
+                    <h1 class="h3 mb-4 text-gray-800 mt-2"><?php echo $produto['nome'];?></h1>
                     <div class="card shadow">
                         <div class="card-body">
+                        <form class="row g-3"  method="POST" enctype="multipart/form-data">
+                
                             <?php
-                               if (isset($_POST['nome'])) {
-                                    if (isset($_GET['id']) && !empty($_GET['id']) ) {
-                                        $id     =   addslashes($_GET['id']);
-                                        $nome   =   addslashes($_POST['nome']);
-                                        $loja   =   addslashes($_POST['loja']);
-                                        $link   =   addslashes($_POST['link']);
-                                        $preco  =   addslashes($_POST['preco']);
-
-                                        if ($p->editar($id, $nome, $loja, $link, $preco)) {
+                            foreach($img as $v){
                             ?>
-                            <meta http-equiv="refresh" content="0; https://cabofriovirtualshopping.com/Administrador/jardim/lojas.php">
+                            <div class="col-md-4">
+                                <img class="img-thumbnail"  alt="..." src="imagens/<?php echo $v['nomeImg']; ?>">
+                                <div class="text-center mt-3">
+                                    <a href="editar_galeria.php?id=<?php echo $v['idImg']; ?>" class="btn btn-primary btn-circle btn-sm"><i class="fas fa-upload"></i></a>
+                                    <a href="excluir_galeria.php?id=<?php echo $v['idImg']; ?>" class="btn btn-danger btn-circle btn-sm" onclick="return confirm('Deseja Excluir a Imagem?')"><i class="fas fa-trash"></i></a>
+                                </div>
+                            </div>
                             <?php
-                                        }
-                                    }
-                               }
+                            }
                             ?>
-                            <form class="user" method="POST">
-                                <div class="form-group row">
-                                    <div class="col-sm-7 mb-3 mb-sm-0">
-                                        <label><b>Nome</b></label>
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName" value="<?php echo $produto['nome'];?>" name="nome">
-                                    </div>
-                                    <div class="col-sm-3 mb-3 mb-sm-0">
-                                        <label><b>Loja</b></label>
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName" value="<?php echo $produto['loja'];?>" name="loja">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <label><b>Link</b></label>
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName" value="<?php echo $produto['link'] ?>" name="link">
-                                    </div>
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
-                                        <label><b>Preço</b></label>
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"  value="<?php echo $produto['preco'] ?>" name="preco">
-                                    </div>
-                                    
-                                </div>
-                                
-                                <div class="text-center">
-                                    <div class="form-group row mt-5 mb-5">
-                                        <div class="col col-sm-2">
-                                        <button type="submit" class="btn btn-warning btn-user btn-block">Editar</button>
-                                        </div>
-                                        <div class="col col-sm-2">
-                                        <button type="reset" class="btn btn-danger btn-user btn-block">Limpar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                        </form>
                         </div>
                     </div>
                 </div>

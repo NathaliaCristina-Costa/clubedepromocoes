@@ -10,6 +10,10 @@
                 $host   = "localhost";
                 $user   = "root";
                 $senha  = "";
+                //$dbname   = "nath3942_clubepromocoes";  
+                //$host     = "br682.hostgator.com.br";
+                //$user     = "nath3942_admin";
+                //$senha    = "34651066N@t";
 
                 try {
                     self::$instance = new PDO('mysql:dbname='.$dbname.';host='.$host,$user,$senha);

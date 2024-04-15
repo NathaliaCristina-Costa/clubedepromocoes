@@ -75,4 +75,53 @@
 
             return true;
         }
+
+        public function galeria($id){
+            $dados = array();
+            $cmd = $this->pdo->prepare('SELECT idImg, nomeImg FROM imagemprodutos WHERE fk_idProduto = :id_fk');
+            $cmd->bindValue(':id_fk', $id);
+            $cmd->execute();
+            $dados = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $dados;
+        }
+
+        public function excluirImagemGaleria($id){
+            $cmd = $this->pdo->prepare('DELETE FROM imagemprodutos WHERE idImg = :idI');
+            $cmd->bindValue(':idI', $id);
+            $cmd->execute();
+        }
+
+        public function editarGaleria($id, $img=array()){
+            if (count($img) > 0) {
+                for ($i=0; $i < count($img); $i++) { 
+                    $nome_foto = $img[$i];
+
+                    $cmd = $this->pdo->prepare('UPDATE imagemprodutos SET nomeImg = :ni WHERE idImg = :idi');
+                    $cmd->bindValue(':idi', $id);
+                    $cmd->bindValue(':ni', $nome_foto);
+
+                    $cmd->execute();
+
+                    return true;
+                }
+            }
+        }
+
+        public function adicionarNovaImagemGaleria($id, $img=array()){
+            if (count($img) > 0) {
+                for ($i=0; $i < count($img); $i++) { 
+                    $nome_img = $img[$i];
+
+                    $cmd = $this->pdo->prepare('INSERT INTO imagemprodutos (nomeImg, fk_idProduto) VALUE (:ni, :fk)');
+                    $cmd->bindValue(':ni', $nome_img);
+                    $cmd->bindValue(':fk', $id);
+
+                    $cmd->execute();
+
+                    return true;
+                }
+            }
+        }
+
+
     }
